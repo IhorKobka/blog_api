@@ -4,22 +4,22 @@ class ApplicationController < ActionController::API
   include JsonResponseable
 
   def index
-    json_collection_response(collection, blueprint, pagination: false)
+    json_collection_response(collection, blueprint, index_options)
   end
 
   def show
-    json_response(resource, blueprint)
+    json_response(resource, blueprint, show_options)
   end
 
   def create
     build_resource
     resource.save!
-    json_response(resource, blueprint, status: :created)
+    json_response(resource, blueprint, create_options)
   end
 
   def update
     resource.update!(resource_params)
-    json_response(resource, blueprint)
+    json_response(resource, blueprint, update_options)
   end
 
   def destroy
@@ -48,5 +48,21 @@ class ApplicationController < ActionController::API
 
   def blueprint
     raise NotImplementedError
+  end
+
+  def index_options
+    { pagination: false }
+  end
+
+  def create_options
+    { status: :created }
+  end
+
+  def update_options
+    {}
+  end
+
+  def show_options
+    { view: :show }
   end
 end

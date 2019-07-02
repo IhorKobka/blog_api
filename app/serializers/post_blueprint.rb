@@ -5,5 +5,8 @@ class PostBlueprint < Blueprinter::Base
   fields :title, :body, :created_at, :updated_at
 
   association :category, blueprint: CategoryBlueprint
-  association :tags, blueprint: TagBlueprint
+
+  view :show do
+    association :tags, blueprint: TagBlueprint
+  end
 end
