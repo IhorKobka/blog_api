@@ -9,7 +9,7 @@ module Api
     end
 
     def resource
-      @resource ||= Post.find(params[:id])
+      @resource ||= Post.includes(:tags).find(params[:id])
     end
 
     def blueprint
