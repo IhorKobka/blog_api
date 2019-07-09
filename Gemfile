@@ -5,6 +5,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.6.3'
 
+gem 'api_authentication', github: 'IhorKobka/api_authentication', branch: :refactoring
 gem 'blueprinter'
 gem 'bootsnap', '>= 1.1.0', require: false
 gem 'oj'
@@ -15,6 +16,7 @@ gem 'rails', '~> 5.2.3'
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'pry-rails'
+  gem 'ffaker'
 end
 
 group :development do

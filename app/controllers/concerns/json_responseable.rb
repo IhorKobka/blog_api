@@ -14,6 +14,10 @@ module JsonResponseable
                                            meta: meta, status: options[:status])
   end
 
+  def json_error_response(message, status)
+    render json: { error: message }, status: status
+  end
+
   private
 
   def pagination_data(collection)

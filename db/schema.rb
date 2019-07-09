@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_02_103508) do
+ActiveRecord::Schema.define(version: 2019_07_08_123024) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -41,6 +41,28 @@ ActiveRecord::Schema.define(version: 2019_07_02_103508) do
     t.index ["tag_id"], name: "index_posts_tags_on_tag_id"
   end
 
+  create_table "push_tokens", force: :cascade do |t|
+    t.bigint "user_id"
+    t.string "token", default: "", null: false
+    t.integer "device_type", default: 0, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_push_tokens_on_user_id"
+  end
+
+  create_table "refresh_tokens", force: :cascade do |t|
+    t.bigint "user_id"
+    t.string "token", default: "", null: false
+    t.datetime "expired_at", null: false
+    t.datetime "revoked_at"
+    t.string "ip_address", default: "", null: false
+    t.string "user_agent", default: "", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["token"], name: "index_refresh_tokens_on_token", unique: true
+    t.index ["user_id"], name: "index_refresh_tokens_on_user_id"
+  end
+
   create_table "tags", force: :cascade do |t|
     t.string "name", null: false
     t.datetime "created_at", null: false
@@ -48,7 +70,20 @@ ActiveRecord::Schema.define(version: 2019_07_02_103508) do
     t.index ["name"], name: "index_tags_on_name", unique: true
   end
 
+  create_table "users", force: :cascade do |t|
+    t.string "email", null: false
+    t.string "first_name", null: false
+    t.string "last_name", null: false
+    t.string "password_digest", null: false
+    t.string "username", null: false
+    t.date "birthday", null: false
+    t.string "facebook_id"
+    t.index ["email"], name: "index_users_on_email", unique: true
+  end
+
   add_foreign_key "posts", "categories"
   add_foreign_key "posts_tags", "posts"
   add_foreign_key "posts_tags", "tags"
+  add_foreign_key "push_tokens", "users"
+  add_foreign_key "refresh_tokens", "users"
 end

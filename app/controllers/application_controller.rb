@@ -1,7 +1,11 @@
 # frozen_string_literal: true
 
 class ApplicationController < ActionController::API
+  include ApiAuthentication::RequestAuthorizeable
   include JsonResponseable
+  include ErrorsCatcher
+
+  before_action :authenticate!
 
   def index
     json_collection_response(collection, blueprint, index_options)

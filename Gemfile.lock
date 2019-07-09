@@ -1,3 +1,13 @@
+GIT
+  remote: https://github.com/IhorKobka/api_authentication.git
+  revision: d44eee1958f87e238630971a73c5abbd4d448e5c
+  branch: refactoring
+  specs:
+    api_authentication (0.2.4)
+      bcrypt
+      draper
+      jwt
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -29,6 +39,10 @@ GEM
       globalid (>= 0.3.6)
     activemodel (5.2.3)
       activesupport (= 5.2.3)
+    activemodel-serializers-xml (1.0.2)
+      activemodel (> 5.x)
+      activesupport (> 5.x)
+      builder (~> 3.1)
     activerecord (5.2.3)
       activemodel (= 5.2.3)
       activesupport (= 5.2.3)
@@ -44,6 +58,7 @@ GEM
       tzinfo (~> 1.1)
     arel (9.0.0)
     ast (2.4.0)
+    bcrypt (3.1.13)
     blueprinter (0.18.0)
     bootsnap (1.4.4)
       msgpack (~> 1.0)
@@ -52,13 +67,21 @@ GEM
     coderay (1.1.2)
     concurrent-ruby (1.1.5)
     crass (1.0.4)
+    draper (3.1.0)
+      actionpack (>= 5.0)
+      activemodel (>= 5.0)
+      activemodel-serializers-xml (>= 1.0)
+      activesupport (>= 5.0)
+      request_store (>= 1.0)
     erubi (1.8.0)
+    ffaker (2.11.0)
     ffi (1.11.1)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
     i18n (1.6.0)
       concurrent-ruby (~> 1.0)
     jaro_winkler (1.5.3)
+    jwt (2.2.1)
     listen (3.1.5)
       rb-fsevent (~> 0.9, >= 0.9.4)
       rb-inotify (~> 0.9, >= 0.9.7)
@@ -122,6 +145,8 @@ GEM
     rb-fsevent (0.10.3)
     rb-inotify (0.10.0)
       ffi (~> 1.0)
+    request_store (1.4.1)
+      rack (>= 1.4)
     rubocop (0.72.0)
       jaro_winkler (~> 1.5.1)
       parallel (~> 1.10)
@@ -157,9 +182,11 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  api_authentication!
   blueprinter
   bootsnap (>= 1.1.0)
   byebug
+  ffaker
   listen (>= 3.0.5, < 3.2)
   oj
   pg (>= 0.18, < 2.0)
