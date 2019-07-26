@@ -7,4 +7,8 @@ class Post < ApplicationRecord
   has_many :tags, through: :posts_tags
 
   validates :title, :body, presence: true
+
+  scope :featured, -> { where(featured: true) }
+  scope :latest, -> { order(created_at: :desc) }
+  scope :most_read, -> { order(reads_count: :desc) }
 end

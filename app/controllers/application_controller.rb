@@ -7,6 +7,8 @@ class ApplicationController < ActionController::API
 
   # before_action :authenticate!
 
+  attr_reader :pagy
+
   def index
     json_collection_response(collection, serializer, index_options)
   end

@@ -5,4 +5,8 @@ class PostSerializer < Panko::Serializer
 
   has_one :category, serializer: ::CategorySerializer
   has_many :tags, serializer: ::TagSerializer
+
+  def body
+    context[:short_body] ? object.body.truncate(120) : object.body
+  end
 end

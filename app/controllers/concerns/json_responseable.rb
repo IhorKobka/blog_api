@@ -12,7 +12,7 @@ module JsonResponseable
         array_serializer_options(serializer, options[:serializer_options]),
       )
     }
-    response[:meta] = pagination_data(collection) if options[:pagination]
+    response[:meta] = pagination_data(options[:pagination]) if options[:pagination]
 
     render json: Panko::Response.new(response)
   end
@@ -31,10 +31,10 @@ module JsonResponseable
 
   def pagination_data(collection)
     {
-      total_count: collection.total_count,
-      total_pages: collection.total_pages,
-      current_page: collection.current_page,
-      per_page: collection.current_per_page
+      total_count: collection.count,
+      total_pages: collection.pages,
+      current_page: collection.page,
+      per_page: collection.items
     }
   end
 end
