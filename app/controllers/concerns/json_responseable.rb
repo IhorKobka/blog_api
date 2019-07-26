@@ -2,7 +2,7 @@
 
 module JsonResponseable
   def json_response(object, serializer, options = {})
-    render json: serializer.new(options[:serializer_options] || {}).serialize(object)
+    render json: serializer.new(options[:serializer_options] || {}).serialize_to_json(object)
   end
 
   def json_collection_response(collection, serializer, options = {})

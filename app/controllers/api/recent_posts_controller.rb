@@ -15,5 +15,16 @@ module Api
     def serializer
       @serializer ||= PostSerializer
     end
+
+    protected
+
+    def index_options
+      {
+        pagination: false,
+        serializer_options: {
+          except: { instance: [:tags], category: [:posts_count] }
+        }
+      }
+    end
   end
 end
