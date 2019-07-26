@@ -1,17 +1,20 @@
 # frozen_string_literal: true
 
 module JsonResponseable
-  # options - view, root, meta
-  def json_response(object, blueprinter, options = {})
-    render json: blueprinter.render(object, options), status: options[:status] || :ok
+  def json_response(object, serializer, options = {})
+    render json: serializer.new(options[:serializer_options] || {}).serialize(object)
   end
 
-  def json_collection_response(collection, blueprinter, options = {})
-    meta = options[:meta]
-    meta.merge!(pagination_data(collection)) if options[:pagination]
+  def json_collection_response(collection, serializer, options = {})
+    response = {
+      collection: Panko::ArraySerializer.new(
+        collection,
+        array_serializer_options(serializer, options[:serializer_options]),
+      )
+    }
+    response[:meta] = pagination_data(collection) if options[:pagination]
 
-    json_response(collection, blueprinter, root: :collection, view: options[:view],
-                                           meta: meta, status: options[:status])
+    render json: Panko::Response.new(response)
   end
 
   def json_error_response(message, status)
@@ -19,6 +22,12 @@ module JsonResponseable
   end
 
   private
+
+  def array_serializer_options(serializer, serializer_options = {})
+    options = serializer_options || {}
+    options[:each_serializer] = serializer
+    options
+  end
 
   def pagination_data(collection)
     {

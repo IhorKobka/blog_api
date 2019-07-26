@@ -5,25 +5,25 @@ class ApplicationController < ActionController::API
   include JsonResponseable
   include ErrorsCatcher
 
-  before_action :authenticate!
+  # before_action :authenticate!
 
   def index
-    json_collection_response(collection, blueprint, index_options)
+    json_collection_response(collection, serializer, index_options)
   end
 
   def show
-    json_response(resource, blueprint, show_options)
+    json_response(resource, serializer, show_options)
   end
 
   def create
     build_resource
     resource.save!
-    json_response(resource, blueprint, create_options)
+    json_response(resource, serializer, create_options)
   end
 
   def update
     resource.update!(resource_params)
-    json_response(resource, blueprint, update_options)
+    json_response(resource, serializer, update_options)
   end
 
   def destroy
@@ -50,7 +50,7 @@ class ApplicationController < ActionController::API
     raise NotImplementedError
   end
 
-  def blueprint
+  def serializer
     raise NotImplementedError
   end
 

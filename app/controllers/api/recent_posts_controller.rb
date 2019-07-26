@@ -1,19 +1,19 @@
 # frozen_string_literal: true
 
 module Api
-  class PostsController < ApplicationController
+  class RecentPostsController < ApplicationController
     private
 
     def collection
-      @collection ||= Post.includes(:category).all
+      @collection ||= Post.includes(:category).limit(25)
     end
 
     def resource
       @resource ||= Post.includes(:tags).find(params[:id])
     end
 
-    def blueprint
-      @blueprint ||= PostBlueprint
+    def serializer
+      @serializer ||= PostSerializer
     end
   end
 end

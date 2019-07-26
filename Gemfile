@@ -8,7 +8,7 @@ ruby '2.6.3'
 gem 'api_authentication', github: 'IhorKobka/api_authentication', branch: :refactoring
 gem 'blueprinter'
 gem 'bootsnap', '>= 1.1.0', require: false
-gem 'oj'
+gem "panko_serializer"
 gem 'pg', '>= 0.18', '< 2.0'
 gem 'puma', '~> 3.11'
 gem 'rails', '~> 5.2.3'
