@@ -16,7 +16,7 @@ class PostsCollectionQuery < BaseQuery
     when 'featured'
       featured_posts
     when 'most_read'
-      featured_posts
+      most_read_posts
     else
       raise NotImplementedError
     end

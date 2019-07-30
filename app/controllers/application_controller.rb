@@ -7,7 +7,7 @@ class ApplicationController < ActionController::API
 
   # before_action :authenticate!
 
-  attr_reader :pagy
+  attr_reader :pagination
 
   def index
     json_collection_response(collection, serializer, index_options)
@@ -57,7 +57,7 @@ class ApplicationController < ActionController::API
   end
 
   def index_options
-    { pagination: false }
+    { pagination: pagination }
   end
 
   def create_options

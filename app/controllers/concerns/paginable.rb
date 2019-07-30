@@ -13,7 +13,7 @@ module Paginable
 
   def collection
     @collection = method(:collection).super_method.call
-    @pagy, @collection = pagy(@collection, items: per_page, page: current_page)
+    @pagination, @collection = pagy(@collection, items: per_page, page: current_page)
     @collection
   end
 end

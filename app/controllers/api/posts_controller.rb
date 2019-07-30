@@ -20,7 +20,7 @@ module Api
 
     def index_options
       {
-        pagination: @pagy,
+        pagination: pagination,
         serializer_options: {
           except: { instance: [:tags], category: [:posts_count] },
           context: { short_body: true }

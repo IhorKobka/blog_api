@@ -8,8 +8,8 @@ module Api
       @collection ||= Categories.all.order(:name)
     end
 
-    def blueprint
-      @blueprint ||= CategoryBlueprint
+    def serializer
+      @serializer ||= CategorySerializer
     end
   end
 end
