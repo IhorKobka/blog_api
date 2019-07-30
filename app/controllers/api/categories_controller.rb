@@ -5,7 +5,7 @@ module Api
     private
 
     def collection
-      @collection ||= Categories.all.order(:name)
+      @collection ||= Category.all.order(:name)
     end
 
     def serializer
